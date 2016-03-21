@@ -8,8 +8,7 @@ using System.Text;
 using System.Windows.Forms;
 using System.Diagnostics;
 using SAKURA;
-
-
+using System.IO;
 
 namespace SAKURA_Checker
 {
@@ -289,6 +288,16 @@ namespace SAKURA_Checker
                 args.randomGeneration = checkBox_randomgeneration.Checked;
                 args.wait = Convert.ToInt32(textBox_wait.Text);
                 args.continueIfError = checkBox_continueiferror.Checked;
+                
+                if (checkBox_rewrite.Checked)
+                {
+                    FileStream fs_ct = new FileStream("ciphertext.txt", FileMode.Create);
+                    fs_ct.Close();
+                    FileStream fs_key = new FileStream("key.txt", FileMode.Create);
+                    fs_key.Close();
+                    FileStream fs_pt = new FileStream("plaintext.txt", FileMode.Create);
+                    fs_pt.Close();
+                }
 
                 //随机数生成，在每次重新run的时候重新随机获取种子
                 Random randc = new Random();

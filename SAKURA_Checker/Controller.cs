@@ -243,6 +243,7 @@ namespace SAKURA
         public double elapsed;
         public RandGen rand;
         public bool last;
+        
 
         public ControllerArgs Clone()
         {
