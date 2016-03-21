@@ -68,6 +68,7 @@
             this.toolStripProgressBar_progress = new System.Windows.Forms.ToolStripProgressBar();
             this.toolStripStatusLabel_message = new System.Windows.Forms.ToolStripStatusLabel();
             this.checkBox_rewrite = new System.Windows.Forms.CheckBox();
+            this.checkBox_check = new System.Windows.Forms.CheckBox();
             this.statusStrip_status.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -507,11 +508,23 @@
             this.checkBox_rewrite.Text = "rewrite";
             this.checkBox_rewrite.UseVisualStyleBackColor = true;
             // 
+            // checkBox_check
+            // 
+            this.checkBox_check.AutoSize = true;
+            this.checkBox_check.Font = new System.Drawing.Font("Consolas", 9.75F);
+            this.checkBox_check.Location = new System.Drawing.Point(590, 442);
+            this.checkBox_check.Name = "checkBox_check";
+            this.checkBox_check.Size = new System.Drawing.Size(159, 40);
+            this.checkBox_check.TabIndex = 37;
+            this.checkBox_check.Text = "uncheck";
+            this.checkBox_check.UseVisualStyleBackColor = true;
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(14F, 27F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1500, 821);
+            this.Controls.Add(this.checkBox_check);
             this.Controls.Add(this.checkBox_rewrite);
             this.Controls.Add(this.statusStrip_status);
             this.Controls.Add(this.textBox_interface);
@@ -604,6 +617,7 @@
         private System.Windows.Forms.ToolStripProgressBar toolStripProgressBar_progress;
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel_message;
         private System.Windows.Forms.CheckBox checkBox_rewrite;
+        private System.Windows.Forms.CheckBox checkBox_check;
     }
 }
 

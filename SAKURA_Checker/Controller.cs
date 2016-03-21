@@ -69,7 +69,8 @@ namespace SAKURA
             targetModule.SetModeEncrypt(true);
             targetModule.SetKey(res.key);
             worker.ReportProgress(0, (object)res);
-
+            string fold = "C:\\powertrace\\C2power traces";
+            string filename;
             while (res.endless || res.current_trace < res.traces) {
                 res.answer = null;
                 res.ciphertext = null;
@@ -88,8 +89,10 @@ namespace SAKURA
 
                 pcModule.Encrypt(ref res.answer, res.key, res.plaintext);
                 worker.ReportProgress(progress, (object)res);
+                if (args.check)
+                    targetModule.Run(ref res.ciphertext, res.plaintext, 0, ref res.elapsed);
+                else targetModule.Run(ref res.ciphertext, res.plaintext, args.wait, ref res.elapsed);
 
-                targetModule.Run(ref res.ciphertext, res.plaintext, res.wait, ref res.elapsed);
                 res.diff = Utils.differenceByteArray(ref res.difference, res.answer, res.ciphertext);
 
                 //***************************************************************************************************************************
@@ -103,12 +106,37 @@ namespace SAKURA
                 //wanganl_FileWrite(res.plaintext);                                   // wanganl注：把明文写入data.txt
                 //wanganl_FileWrite(res.plaintext_mask);                              // wanganl注：把明文掩码写入data.txt
                 //wanganl_FileWrite(res.ciphertext);                                  // wanganl注：把密文写入data.txt
-
-
-                //wanganl_FileWrite(temp_num);                                        // wanganl：把每次加密的编号（4位16进制数）写入data.txt
-                Key_FileWrite(res.key);                                             // shenal注：把密钥写入data.txt
-                Plaintext_FileWrite(res.plaintext);                                   // shenal注：把明文写入data.txt
-                Ciphertext_FileWrite(res.ciphertext);                                  // shenal注：把密文写入data.txt
+                bool skip = false;
+                if (args.check)
+                {
+                    filename = fold + (res.current_trace - 1).ToString("d5");
+                    filename = filename + ".dat";
+                    int startTime = System.Environment.TickCount;
+                    while (File.Exists(filename) == false)
+                    {
+                        System.Threading.Thread.Sleep(10);
+                        int runtime = System.Environment.TickCount - startTime;
+                        if (runtime > 1000) { skip = true; res.current_trace -= 1; break; }
+                    }
+                    while (true)
+                    {
+                        try
+                        {
+                            FileInfo file = new FileInfo(filename);
+                            if (file.Length > 110000) break;
+                        }
+                        catch { break; }
+                        System.Threading.Thread.Sleep(10);
+                    }
+                    System.Threading.Thread.Sleep(args.wait);
+                }
+                //wanganl_FileWrite(temp_num); // wanganl：把每次加密的编号（4位16进制数）写入data.txt
+                if (skip == false)
+                {
+                    Key_FileWrite(res.key);                                             // shenal注：把密钥写入data.txt
+                    Plaintext_FileWrite(res.plaintext);                                   // shenal注：把明文写入data.txt
+                    Ciphertext_FileWrite(res.ciphertext);                                  // shenal注：把密文写入data.txt
+                }
                 //****************************************************************************************************************************
 
                 worker.ReportProgress(progress, (object)res);
@@ -138,6 +166,7 @@ namespace SAKURA
             res.last = true;
             worker.ReportProgress(progress, (object)res);
             e.Result = (object)res;
+        
         }
 
       //***********************************************************************************************************************************
@@ -243,6 +272,7 @@ namespace SAKURA
         public double elapsed;
         public RandGen rand;
         public bool last;
+        public bool check;
         
 
         public ControllerArgs Clone()

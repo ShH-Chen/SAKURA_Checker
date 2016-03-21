@@ -288,7 +288,7 @@ namespace SAKURA_Checker
                 args.randomGeneration = checkBox_randomgeneration.Checked;
                 args.wait = Convert.ToInt32(textBox_wait.Text);
                 args.continueIfError = checkBox_continueiferror.Checked;
-                
+                args.check = !checkBox_check.Checked;
                 if (checkBox_rewrite.Checked)
                 {
                     FileStream fs_ct = new FileStream("ciphertext.txt", FileMode.Create);
