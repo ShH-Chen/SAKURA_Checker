@@ -118,12 +118,15 @@ namespace SAKURA
                         int runtime = System.Environment.TickCount - startTime;
                         if (runtime > 1000) { skip = true; res.current_trace -= 1; break; }
                     }
+                    startTime = System.Environment.TickCount;
                     while (true)
                     {
                         try
                         {
                             FileInfo file = new FileInfo(filename);
-                            if (file.Length > 110000) break;
+                            if (file.Length > 100000) break;
+                            int runtime = System.Environment.TickCount - startTime;
+                            if (runtime > 1000) { break; }
                         }
                         catch { break; }
                         System.Threading.Thread.Sleep(10);
