@@ -71,11 +71,22 @@ namespace SAKURA
             worker.ReportProgress(0, (object)res);
             string fold = "C:\\powertrace\\C2power traces";
             string filename;
+
+            FileStream fs_pt = new FileStream("plaintext.txt", FileMode.Append);
+            FileStream fs_key = new FileStream("key.txt", FileMode.Append);
+            FileStream fs_ct = new FileStream("ciphertext.txt", FileMode.Append);
+            StreamWriter sw_pt = new StreamWriter(fs_pt, Encoding.Default);
+            StreamWriter sw_key = new StreamWriter(fs_key, Encoding.Default);
+            StreamWriter sw_ct = new StreamWriter(fs_ct, Encoding.Default);
+
+            int inittime;
             while (res.endless || res.current_trace < res.traces) {
                 res.answer = null;
                 res.ciphertext = null;
                 res.difference = null;
                 res.current_trace++;
+
+                inittime = System.Environment.TickCount;
 
                 if (!res.endless)
                 {
@@ -111,11 +122,11 @@ namespace SAKURA
                 {
                     filename = fold + (res.current_trace - 1).ToString("d5");
                     filename = filename + ".dat";
-                    int startTime = System.Environment.TickCount;
+                    int startTime = Environment.TickCount;
                     while (File.Exists(filename) == false)
                     {
                         System.Threading.Thread.Sleep(10);
-                        int runtime = System.Environment.TickCount - startTime;
+                        int runtime = Environment.TickCount - startTime;
                         if (runtime > 1000) { skip = true; res.current_trace -= 1; break; }
                     }
                     startTime = System.Environment.TickCount;
@@ -125,7 +136,7 @@ namespace SAKURA
                         {
                             FileInfo file = new FileInfo(filename);
                             if (file.Length > 100000) break;
-                            int runtime = System.Environment.TickCount - startTime;
+                            int runtime = Environment.TickCount - startTime;
                             if (runtime > 1000) { break; }
                         }
                         catch { break; }
@@ -136,9 +147,9 @@ namespace SAKURA
                 //wanganl_FileWrite(temp_num); // wanganl：把每次加密的编号（4位16进制数）写入data.txt
                 if (skip == false)
                 {
-                    Key_FileWrite(res.key);                                             // shenal注：把密钥写入data.txt
-                    Plaintext_FileWrite(res.plaintext);                                   // shenal注：把明文写入data.txt
-                    Ciphertext_FileWrite(res.ciphertext);                                  // shenal注：把密文写入data.txt
+                    FileWrite(res.key,sw_key);                                             // shenal注：把密钥写入data.txt
+                    FileWrite(res.plaintext,sw_pt);                                   // shenal注：把明文写入data.txt
+                    FileWrite(res.ciphertext,sw_ct);                                  // shenal注：把密文写入data.txt
                 }
                 //****************************************************************************************************************************
 
@@ -164,7 +175,16 @@ namespace SAKURA
                     progress = 100;
                     break;
                 }
-            }
+                res.elapsed = (double)(Environment.TickCount - inittime)/1000;
+
+            }   //while loop end here
+
+            sw_ct.Close();
+            sw_key.Close();
+            sw_pt.Close();
+            fs_ct.Close();
+            fs_pt.Close();
+            fs_key.Close();
 
             res.last = true;
             worker.ReportProgress(progress, (object)res);
@@ -194,7 +214,7 @@ namespace SAKURA
         //********************************************************************************************************************************
 
         //***********************************************************************************************************************************
-        public void Plaintext_FileWrite(byte[] byte_buffer)                                             // shenal注：自定义文件存储函数
+        public void FileWrite(byte[] byte_buffer , StreamWriter sw)                                             // shenal注：自定义文件存储函数
         {
             // 数据被写到data.txt里，进来的是byte数组，输出的是16进制的string，一个数存一行
             string hex_String = string.Empty;
@@ -205,53 +225,12 @@ namespace SAKURA
                     strB.Append(byte_buffer[i].ToString("X2"));
                 hex_String = strB.ToString();
             }
-            FileStream fs = new FileStream("plaintext.txt", FileMode.Append);
-            StreamWriter sw = new StreamWriter(fs, Encoding.Default);
+            //FileStream fs = new FileStream("plaintext.txt", FileMode.Append);
+           // StreamWriter sw = new StreamWriter(fs, Encoding.Default);
             sw.Write(hex_String);
             sw.Write("\r\n");                                                       // shenal注：\r是光标去下行开头，\n是换行
-            sw.Close();
-            fs.Close();
-        }   // shenal注：自定义文件存储函数结束
-        //********************************************************************************************************************************
-
-
-        public void Ciphertext_FileWrite(byte[] byte_buffer)                                             // shenal注：自定义文件存储函数
-        {
-            // 数据被写到data.txt里，进来的是byte数组，输出的是16进制的string，一个数存一行
-            string hex_String = string.Empty;
-            if (byte_buffer != null)
-            {
-                StringBuilder strB = new StringBuilder();
-                for (int i = 0; i < byte_buffer.Length; i++)
-                    strB.Append(byte_buffer[i].ToString("X2"));
-                hex_String = strB.ToString();
-            }
-            FileStream fs = new FileStream("ciphertext.txt", FileMode.Append);
-            StreamWriter sw = new StreamWriter(fs, Encoding.Default);
-            sw.Write(hex_String);
-            sw.Write("\r\n");                                                       // shenal注：\r是光标去下行开头，\n是换行
-            sw.Close();
-            fs.Close();
-        }   // shenal注：自定义文件存储函数结束
-        //********************************************************************************************************************************
-
-        public void Key_FileWrite(byte[] byte_buffer)                                             // shenal注：自定义文件存储函数
-        {
-            // 数据被写到data.txt里，进来的是byte数组，输出的是16进制的string，一个数存一行
-            string hex_String = string.Empty;
-            if (byte_buffer != null)
-            {
-                StringBuilder strB = new StringBuilder();
-                for (int i = 0; i < byte_buffer.Length; i++)
-                    strB.Append(byte_buffer[i].ToString("X2"));
-                hex_String = strB.ToString();
-            }
-            FileStream fs = new FileStream("key.txt", FileMode.Append);
-            StreamWriter sw = new StreamWriter(fs, Encoding.Default);
-            sw.Write(hex_String);
-            sw.Write("\r\n");                                                       // shenal注：\r是光标去下行开头，\n是换行
-            sw.Close();
-            fs.Close();
+            //sw.Close();
+            //fs.Close();
         }   // shenal注：自定义文件存储函数结束
         //********************************************************************************************************************************
     }
