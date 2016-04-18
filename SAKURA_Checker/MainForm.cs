@@ -168,6 +168,10 @@ namespace SAKURA_Checker
                     button_start.Enabled = true;
                     button_stop.Enabled = false;
                     checkBox_continueiferror.Enabled = true;
+
+                    checkBox_check.Enabled = true;
+                    checkBox_rewrite.Enabled = true;
+                    textBox_path.Enabled = true;
                     break;
 
                 case appState.Start:
@@ -186,6 +190,10 @@ namespace SAKURA_Checker
                     button_start.Enabled = false;
                     button_stop.Enabled = true;
                     checkBox_continueiferror.Enabled = false;
+
+                    checkBox_check.Enabled = false;
+                    checkBox_rewrite.Enabled = false;
+                    textBox_path.Enabled = false;
                     break;
 
                 case appState.Running:
@@ -204,6 +212,10 @@ namespace SAKURA_Checker
                     button_start.Enabled = false;
                     button_stop.Enabled = true;
                     checkBox_continueiferror.Enabled = false;
+
+                    checkBox_check.Enabled = false;
+                    checkBox_rewrite.Enabled = false;
+                    textBox_path.Enabled = false;
                     break;
 
                 case appState.Stop:
@@ -222,6 +234,10 @@ namespace SAKURA_Checker
                     button_start.Enabled = false;
                     button_stop.Enabled = false;
                     checkBox_continueiferror.Enabled = false;
+
+                    checkBox_check.Enabled = false;
+                    checkBox_rewrite.Enabled = false;
+                    textBox_path.Enabled = false;
                     break;
             }
         }
@@ -289,6 +305,7 @@ namespace SAKURA_Checker
                 args.wait = Convert.ToInt32(textBox_wait.Text);
                 args.continueIfError = checkBox_continueiferror.Checked;
                 args.check = !checkBox_check.Checked;
+                args.path = textBox_path.Text;
                 if (checkBox_rewrite.Checked)
                 {
                     FileStream fs_ct = new FileStream("ciphertext.txt", FileMode.Create);
@@ -320,6 +337,24 @@ namespace SAKURA_Checker
         private void MainForm_Load(object sender, EventArgs e)
         {
 
+        }
+
+        private void button_openfold_Click(object sender, EventArgs e)
+        {
+            FolderBrowserDialog dialog = new FolderBrowserDialog();
+            dialog.ShowNewFolderButton = true;
+            dialog.Description = "Select Fold";
+            if (textBox_path.Text != "")
+            {
+                //设置此次默认目录为上一次选中目录
+                dialog.SelectedPath = textBox_path.Text;
+            }
+            if (dialog.ShowDialog() == DialogResult.OK)
+            {
+                string foldPath = dialog.SelectedPath;
+                textBox_path.Text = foldPath;
+                //MessageBox.Show("Selected Fold:" + textBox_path.Text, "选择文件夹提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
         }
     }
 }

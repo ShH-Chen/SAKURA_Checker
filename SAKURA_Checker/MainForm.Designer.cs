@@ -69,6 +69,9 @@
             this.toolStripStatusLabel_message = new System.Windows.Forms.ToolStripStatusLabel();
             this.checkBox_rewrite = new System.Windows.Forms.CheckBox();
             this.checkBox_check = new System.Windows.Forms.CheckBox();
+            this.label_path = new System.Windows.Forms.Label();
+            this.textBox_path = new System.Windows.Forms.TextBox();
+            this.button_openfold = new System.Windows.Forms.Button();
             this.statusStrip_status.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -80,7 +83,7 @@
             this.comboBox_target.Items.AddRange(new object[] {
             "SAKURA-G Quick Start"});
             this.comboBox_target.Location = new System.Drawing.Point(212, 76);
-            this.comboBox_target.Margin = new System.Windows.Forms.Padding(7, 7, 7, 7);
+            this.comboBox_target.Margin = new System.Windows.Forms.Padding(7);
             this.comboBox_target.Name = "comboBox_target";
             this.comboBox_target.Size = new System.Drawing.Size(779, 42);
             this.comboBox_target.TabIndex = 3;
@@ -111,7 +114,7 @@
             // 
             this.label_traces.AutoSize = true;
             this.label_traces.Font = new System.Drawing.Font("Consolas", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label_traces.Location = new System.Drawing.Point(19, 140);
+            this.label_traces.Location = new System.Drawing.Point(19, 207);
             this.label_traces.Margin = new System.Windows.Forms.Padding(7, 0, 7, 0);
             this.label_traces.Name = "label_traces";
             this.label_traces.Size = new System.Drawing.Size(127, 36);
@@ -121,8 +124,8 @@
             // textBox_traces
             // 
             this.textBox_traces.Font = new System.Drawing.Font("Consolas", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBox_traces.Location = new System.Drawing.Point(212, 133);
-            this.textBox_traces.Margin = new System.Windows.Forms.Padding(7, 7, 7, 7);
+            this.textBox_traces.Location = new System.Drawing.Point(212, 200);
+            this.textBox_traces.Margin = new System.Windows.Forms.Padding(7);
             this.textBox_traces.Name = "textBox_traces";
             this.textBox_traces.Size = new System.Drawing.Size(228, 42);
             this.textBox_traces.TabIndex = 5;
@@ -133,7 +136,7 @@
             // 
             this.label_key.AutoSize = true;
             this.label_key.Font = new System.Drawing.Font("Consolas", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label_key.Location = new System.Drawing.Point(19, 196);
+            this.label_key.Location = new System.Drawing.Point(19, 263);
             this.label_key.Margin = new System.Windows.Forms.Padding(7, 0, 7, 0);
             this.label_key.Name = "label_key";
             this.label_key.Size = new System.Drawing.Size(63, 36);
@@ -144,7 +147,7 @@
             // 
             this.label_plaintext.AutoSize = true;
             this.label_plaintext.Font = new System.Drawing.Font("Consolas", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label_plaintext.Location = new System.Drawing.Point(19, 252);
+            this.label_plaintext.Location = new System.Drawing.Point(19, 319);
             this.label_plaintext.Margin = new System.Windows.Forms.Padding(7, 0, 7, 0);
             this.label_plaintext.Name = "label_plaintext";
             this.label_plaintext.Size = new System.Drawing.Size(159, 36);
@@ -157,8 +160,8 @@
             this.checkBox_endless.Checked = true;
             this.checkBox_endless.CheckState = System.Windows.Forms.CheckState.Checked;
             this.checkBox_endless.Font = new System.Drawing.Font("Consolas", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.checkBox_endless.Location = new System.Drawing.Point(460, 137);
-            this.checkBox_endless.Margin = new System.Windows.Forms.Padding(7, 7, 7, 7);
+            this.checkBox_endless.Location = new System.Drawing.Point(460, 204);
+            this.checkBox_endless.Margin = new System.Windows.Forms.Padding(7);
             this.checkBox_endless.Name = "checkBox_endless";
             this.checkBox_endless.Size = new System.Drawing.Size(159, 40);
             this.checkBox_endless.TabIndex = 6;
@@ -168,8 +171,8 @@
             // textBox_key
             // 
             this.textBox_key.Font = new System.Drawing.Font("Consolas", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBox_key.Location = new System.Drawing.Point(212, 189);
-            this.textBox_key.Margin = new System.Windows.Forms.Padding(7, 7, 7, 7);
+            this.textBox_key.Location = new System.Drawing.Point(212, 256);
+            this.textBox_key.Margin = new System.Windows.Forms.Padding(7);
             this.textBox_key.Name = "textBox_key";
             this.textBox_key.Size = new System.Drawing.Size(779, 42);
             this.textBox_key.TabIndex = 8;
@@ -179,8 +182,8 @@
             // button_changekey
             // 
             this.button_changekey.Font = new System.Drawing.Font("Consolas", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button_changekey.Location = new System.Drawing.Point(1010, 187);
-            this.button_changekey.Margin = new System.Windows.Forms.Padding(7, 7, 7, 7);
+            this.button_changekey.Location = new System.Drawing.Point(1010, 254);
+            this.button_changekey.Margin = new System.Windows.Forms.Padding(7);
             this.button_changekey.Name = "button_changekey";
             this.button_changekey.Size = new System.Drawing.Size(135, 52);
             this.button_changekey.TabIndex = 9;
@@ -191,8 +194,8 @@
             // textBox_plaintext
             // 
             this.textBox_plaintext.Font = new System.Drawing.Font("Consolas", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBox_plaintext.Location = new System.Drawing.Point(212, 245);
-            this.textBox_plaintext.Margin = new System.Windows.Forms.Padding(7, 7, 7, 7);
+            this.textBox_plaintext.Location = new System.Drawing.Point(212, 312);
+            this.textBox_plaintext.Margin = new System.Windows.Forms.Padding(7);
             this.textBox_plaintext.Name = "textBox_plaintext";
             this.textBox_plaintext.Size = new System.Drawing.Size(779, 42);
             this.textBox_plaintext.TabIndex = 12;
@@ -202,8 +205,8 @@
             // button_changeplaintext
             // 
             this.button_changeplaintext.Font = new System.Drawing.Font("Consolas", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button_changeplaintext.Location = new System.Drawing.Point(1010, 243);
-            this.button_changeplaintext.Margin = new System.Windows.Forms.Padding(7, 7, 7, 7);
+            this.button_changeplaintext.Location = new System.Drawing.Point(1010, 310);
+            this.button_changeplaintext.Margin = new System.Windows.Forms.Padding(7);
             this.button_changeplaintext.Name = "button_changeplaintext";
             this.button_changeplaintext.Size = new System.Drawing.Size(135, 52);
             this.button_changeplaintext.TabIndex = 13;
@@ -217,8 +220,8 @@
             this.checkBox_randomgeneration.Checked = true;
             this.checkBox_randomgeneration.CheckState = System.Windows.Forms.CheckState.Checked;
             this.checkBox_randomgeneration.Font = new System.Drawing.Font("Consolas", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.checkBox_randomgeneration.Location = new System.Drawing.Point(1160, 250);
-            this.checkBox_randomgeneration.Margin = new System.Windows.Forms.Padding(7, 7, 7, 7);
+            this.checkBox_randomgeneration.Location = new System.Drawing.Point(1160, 317);
+            this.checkBox_randomgeneration.Margin = new System.Windows.Forms.Padding(7);
             this.checkBox_randomgeneration.Name = "checkBox_randomgeneration";
             this.checkBox_randomgeneration.Size = new System.Drawing.Size(319, 40);
             this.checkBox_randomgeneration.TabIndex = 14;
@@ -229,7 +232,7 @@
             // 
             this.label_wait.AutoSize = true;
             this.label_wait.Font = new System.Drawing.Font("Consolas", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label_wait.Location = new System.Drawing.Point(19, 308);
+            this.label_wait.Location = new System.Drawing.Point(19, 375);
             this.label_wait.Margin = new System.Windows.Forms.Padding(7, 0, 7, 0);
             this.label_wait.Name = "label_wait";
             this.label_wait.Size = new System.Drawing.Size(79, 36);
@@ -239,8 +242,8 @@
             // textBox_wait
             // 
             this.textBox_wait.Font = new System.Drawing.Font("Consolas", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBox_wait.Location = new System.Drawing.Point(212, 302);
-            this.textBox_wait.Margin = new System.Windows.Forms.Padding(7, 7, 7, 7);
+            this.textBox_wait.Location = new System.Drawing.Point(212, 369);
+            this.textBox_wait.Margin = new System.Windows.Forms.Padding(7);
             this.textBox_wait.Name = "textBox_wait";
             this.textBox_wait.Size = new System.Drawing.Size(228, 42);
             this.textBox_wait.TabIndex = 16;
@@ -250,8 +253,8 @@
             // button_single
             // 
             this.button_single.Font = new System.Drawing.Font("Consolas", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button_single.Location = new System.Drawing.Point(23, 367);
-            this.button_single.Margin = new System.Windows.Forms.Padding(7, 7, 7, 7);
+            this.button_single.Location = new System.Drawing.Point(23, 434);
+            this.button_single.Margin = new System.Windows.Forms.Padding(7);
             this.button_single.Name = "button_single";
             this.button_single.Size = new System.Drawing.Size(175, 52);
             this.button_single.TabIndex = 18;
@@ -262,8 +265,8 @@
             // button_start
             // 
             this.button_start.Font = new System.Drawing.Font("Consolas", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button_start.Location = new System.Drawing.Point(212, 367);
-            this.button_start.Margin = new System.Windows.Forms.Padding(7, 7, 7, 7);
+            this.button_start.Location = new System.Drawing.Point(212, 434);
+            this.button_start.Margin = new System.Windows.Forms.Padding(7);
             this.button_start.Name = "button_start";
             this.button_start.Size = new System.Drawing.Size(175, 52);
             this.button_start.TabIndex = 19;
@@ -275,8 +278,8 @@
             // 
             this.button_stop.Enabled = false;
             this.button_stop.Font = new System.Drawing.Font("Consolas", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button_stop.Location = new System.Drawing.Point(401, 367);
-            this.button_stop.Margin = new System.Windows.Forms.Padding(7, 7, 7, 7);
+            this.button_stop.Location = new System.Drawing.Point(401, 434);
+            this.button_stop.Margin = new System.Windows.Forms.Padding(7);
             this.button_stop.Name = "button_stop";
             this.button_stop.Size = new System.Drawing.Size(175, 52);
             this.button_stop.TabIndex = 20;
@@ -288,8 +291,8 @@
             // 
             this.checkBox_continueiferror.AutoSize = true;
             this.checkBox_continueiferror.Font = new System.Drawing.Font("Consolas", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.checkBox_continueiferror.Location = new System.Drawing.Point(590, 374);
-            this.checkBox_continueiferror.Margin = new System.Windows.Forms.Padding(7, 7, 7, 7);
+            this.checkBox_continueiferror.Location = new System.Drawing.Point(590, 441);
+            this.checkBox_continueiferror.Margin = new System.Windows.Forms.Padding(7);
             this.checkBox_continueiferror.Name = "checkBox_continueiferror";
             this.checkBox_continueiferror.Size = new System.Drawing.Size(319, 40);
             this.checkBox_continueiferror.TabIndex = 21;
@@ -300,7 +303,7 @@
             // 
             this.label_rtraces.AutoSize = true;
             this.label_rtraces.Font = new System.Drawing.Font("Consolas", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label_rtraces.Location = new System.Drawing.Point(19, 439);
+            this.label_rtraces.Location = new System.Drawing.Point(19, 506);
             this.label_rtraces.Margin = new System.Windows.Forms.Padding(7, 0, 7, 0);
             this.label_rtraces.Name = "label_rtraces";
             this.label_rtraces.Size = new System.Drawing.Size(127, 36);
@@ -310,8 +313,8 @@
             // textBox_rtraces
             // 
             this.textBox_rtraces.Font = new System.Drawing.Font("Consolas", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBox_rtraces.Location = new System.Drawing.Point(212, 432);
-            this.textBox_rtraces.Margin = new System.Windows.Forms.Padding(7, 7, 7, 7);
+            this.textBox_rtraces.Location = new System.Drawing.Point(212, 499);
+            this.textBox_rtraces.Margin = new System.Windows.Forms.Padding(7);
             this.textBox_rtraces.Name = "textBox_rtraces";
             this.textBox_rtraces.ReadOnly = true;
             this.textBox_rtraces.Size = new System.Drawing.Size(228, 42);
@@ -323,7 +326,7 @@
             // 
             this.label_rplaintext.AutoSize = true;
             this.label_rplaintext.Font = new System.Drawing.Font("Consolas", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label_rplaintext.Location = new System.Drawing.Point(19, 551);
+            this.label_rplaintext.Location = new System.Drawing.Point(19, 618);
             this.label_rplaintext.Margin = new System.Windows.Forms.Padding(7, 0, 7, 0);
             this.label_rplaintext.Name = "label_rplaintext";
             this.label_rplaintext.Size = new System.Drawing.Size(159, 36);
@@ -334,7 +337,7 @@
             // 
             this.label_rciphertext.AutoSize = true;
             this.label_rciphertext.Font = new System.Drawing.Font("Consolas", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label_rciphertext.Location = new System.Drawing.Point(19, 608);
+            this.label_rciphertext.Location = new System.Drawing.Point(19, 675);
             this.label_rciphertext.Margin = new System.Windows.Forms.Padding(7, 0, 7, 0);
             this.label_rciphertext.Name = "label_rciphertext";
             this.label_rciphertext.Size = new System.Drawing.Size(175, 36);
@@ -345,7 +348,7 @@
             // 
             this.label_ranswer.AutoSize = true;
             this.label_ranswer.Font = new System.Drawing.Font("Consolas", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label_ranswer.Location = new System.Drawing.Point(19, 664);
+            this.label_ranswer.Location = new System.Drawing.Point(19, 731);
             this.label_ranswer.Margin = new System.Windows.Forms.Padding(7, 0, 7, 0);
             this.label_ranswer.Name = "label_ranswer";
             this.label_ranswer.Size = new System.Drawing.Size(111, 36);
@@ -356,7 +359,7 @@
             // 
             this.label_rdifference.AutoSize = true;
             this.label_rdifference.Font = new System.Drawing.Font("Consolas", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label_rdifference.Location = new System.Drawing.Point(19, 720);
+            this.label_rdifference.Location = new System.Drawing.Point(19, 787);
             this.label_rdifference.Margin = new System.Windows.Forms.Padding(7, 0, 7, 0);
             this.label_rdifference.Name = "label_rdifference";
             this.label_rdifference.Size = new System.Drawing.Size(175, 36);
@@ -367,7 +370,7 @@
             // 
             this.label_relapsed.AutoSize = true;
             this.label_relapsed.Font = new System.Drawing.Font("Consolas", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label_relapsed.Location = new System.Drawing.Point(19, 495);
+            this.label_relapsed.Location = new System.Drawing.Point(19, 562);
             this.label_relapsed.Margin = new System.Windows.Forms.Padding(7, 0, 7, 0);
             this.label_relapsed.Name = "label_relapsed";
             this.label_relapsed.Size = new System.Drawing.Size(127, 36);
@@ -377,8 +380,8 @@
             // textBox_rplaintext
             // 
             this.textBox_rplaintext.Font = new System.Drawing.Font("Consolas", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBox_rplaintext.Location = new System.Drawing.Point(212, 544);
-            this.textBox_rplaintext.Margin = new System.Windows.Forms.Padding(7, 7, 7, 7);
+            this.textBox_rplaintext.Location = new System.Drawing.Point(212, 611);
+            this.textBox_rplaintext.Margin = new System.Windows.Forms.Padding(7);
             this.textBox_rplaintext.Name = "textBox_rplaintext";
             this.textBox_rplaintext.ReadOnly = true;
             this.textBox_rplaintext.Size = new System.Drawing.Size(779, 42);
@@ -387,8 +390,8 @@
             // textBox_rciphertext
             // 
             this.textBox_rciphertext.Font = new System.Drawing.Font("Consolas", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBox_rciphertext.Location = new System.Drawing.Point(212, 601);
-            this.textBox_rciphertext.Margin = new System.Windows.Forms.Padding(7, 7, 7, 7);
+            this.textBox_rciphertext.Location = new System.Drawing.Point(212, 668);
+            this.textBox_rciphertext.Margin = new System.Windows.Forms.Padding(7);
             this.textBox_rciphertext.Name = "textBox_rciphertext";
             this.textBox_rciphertext.ReadOnly = true;
             this.textBox_rciphertext.Size = new System.Drawing.Size(779, 42);
@@ -397,8 +400,8 @@
             // textBox_ranswer
             // 
             this.textBox_ranswer.Font = new System.Drawing.Font("Consolas", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBox_ranswer.Location = new System.Drawing.Point(212, 657);
-            this.textBox_ranswer.Margin = new System.Windows.Forms.Padding(7, 7, 7, 7);
+            this.textBox_ranswer.Location = new System.Drawing.Point(212, 724);
+            this.textBox_ranswer.Margin = new System.Windows.Forms.Padding(7);
             this.textBox_ranswer.Name = "textBox_ranswer";
             this.textBox_ranswer.ReadOnly = true;
             this.textBox_ranswer.Size = new System.Drawing.Size(779, 42);
@@ -407,8 +410,8 @@
             // textBox_rdifference
             // 
             this.textBox_rdifference.Font = new System.Drawing.Font("Consolas", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBox_rdifference.Location = new System.Drawing.Point(212, 713);
-            this.textBox_rdifference.Margin = new System.Windows.Forms.Padding(7, 7, 7, 7);
+            this.textBox_rdifference.Location = new System.Drawing.Point(212, 780);
+            this.textBox_rdifference.Margin = new System.Windows.Forms.Padding(7);
             this.textBox_rdifference.Name = "textBox_rdifference";
             this.textBox_rdifference.ReadOnly = true;
             this.textBox_rdifference.Size = new System.Drawing.Size(779, 42);
@@ -418,8 +421,8 @@
             // 
             this.checkBox_56bitkey.AutoSize = true;
             this.checkBox_56bitkey.Font = new System.Drawing.Font("Consolas", 9.75F);
-            this.checkBox_56bitkey.Location = new System.Drawing.Point(1160, 198);
-            this.checkBox_56bitkey.Margin = new System.Windows.Forms.Padding(7, 7, 7, 7);
+            this.checkBox_56bitkey.Location = new System.Drawing.Point(1160, 265);
+            this.checkBox_56bitkey.Margin = new System.Windows.Forms.Padding(7);
             this.checkBox_56bitkey.Name = "checkBox_56bitkey";
             this.checkBox_56bitkey.Size = new System.Drawing.Size(191, 40);
             this.checkBox_56bitkey.TabIndex = 10;
@@ -430,8 +433,8 @@
             // textBox_relapsed
             // 
             this.textBox_relapsed.Font = new System.Drawing.Font("Consolas", 9.75F);
-            this.textBox_relapsed.Location = new System.Drawing.Point(212, 488);
-            this.textBox_relapsed.Margin = new System.Windows.Forms.Padding(7, 7, 7, 7);
+            this.textBox_relapsed.Location = new System.Drawing.Point(212, 555);
+            this.textBox_relapsed.Margin = new System.Windows.Forms.Padding(7);
             this.textBox_relapsed.Name = "textBox_relapsed";
             this.textBox_relapsed.ReadOnly = true;
             this.textBox_relapsed.Size = new System.Drawing.Size(228, 42);
@@ -442,7 +445,7 @@
             // 
             this.label_waitms.AutoSize = true;
             this.label_waitms.Font = new System.Drawing.Font("Consolas", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label_waitms.Location = new System.Drawing.Point(460, 308);
+            this.label_waitms.Location = new System.Drawing.Point(460, 375);
             this.label_waitms.Margin = new System.Windows.Forms.Padding(7, 0, 7, 0);
             this.label_waitms.Name = "label_waitms";
             this.label_waitms.Size = new System.Drawing.Size(47, 36);
@@ -453,7 +456,7 @@
             // 
             this.label_relapsed_ms.AutoSize = true;
             this.label_relapsed_ms.Font = new System.Drawing.Font("Consolas", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label_relapsed_ms.Location = new System.Drawing.Point(460, 495);
+            this.label_relapsed_ms.Location = new System.Drawing.Point(460, 562);
             this.label_relapsed_ms.Margin = new System.Windows.Forms.Padding(7, 0, 7, 0);
             this.label_relapsed_ms.Name = "label_relapsed_ms";
             this.label_relapsed_ms.Size = new System.Drawing.Size(47, 36);
@@ -464,7 +467,7 @@
             // 
             this.textBox_interface.Font = new System.Drawing.Font("Consolas", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.textBox_interface.Location = new System.Drawing.Point(212, 20);
-            this.textBox_interface.Margin = new System.Windows.Forms.Padding(7, 7, 7, 7);
+            this.textBox_interface.Margin = new System.Windows.Forms.Padding(7);
             this.textBox_interface.Name = "textBox_interface";
             this.textBox_interface.Size = new System.Drawing.Size(228, 42);
             this.textBox_interface.TabIndex = 1;
@@ -476,7 +479,7 @@
             this.statusStrip_status.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.toolStripProgressBar_progress,
             this.toolStripStatusLabel_message});
-            this.statusStrip_status.Location = new System.Drawing.Point(0, 779);
+            this.statusStrip_status.Location = new System.Drawing.Point(0, 841);
             this.statusStrip_status.Name = "statusStrip_status";
             this.statusStrip_status.Padding = new System.Windows.Forms.Padding(2, 0, 33, 0);
             this.statusStrip_status.Size = new System.Drawing.Size(1500, 42);
@@ -501,7 +504,7 @@
             // 
             this.checkBox_rewrite.AutoSize = true;
             this.checkBox_rewrite.Font = new System.Drawing.Font("Consolas", 9.75F);
-            this.checkBox_rewrite.Location = new System.Drawing.Point(590, 308);
+            this.checkBox_rewrite.Location = new System.Drawing.Point(590, 375);
             this.checkBox_rewrite.Name = "checkBox_rewrite";
             this.checkBox_rewrite.Size = new System.Drawing.Size(159, 40);
             this.checkBox_rewrite.TabIndex = 36;
@@ -512,18 +515,56 @@
             // 
             this.checkBox_check.AutoSize = true;
             this.checkBox_check.Font = new System.Drawing.Font("Consolas", 9.75F);
-            this.checkBox_check.Location = new System.Drawing.Point(590, 442);
+            this.checkBox_check.Location = new System.Drawing.Point(590, 509);
             this.checkBox_check.Name = "checkBox_check";
             this.checkBox_check.Size = new System.Drawing.Size(159, 40);
             this.checkBox_check.TabIndex = 37;
             this.checkBox_check.Text = "uncheck";
             this.checkBox_check.UseVisualStyleBackColor = true;
             // 
+            // label_path
+            // 
+            this.label_path.AutoSize = true;
+            this.label_path.Font = new System.Drawing.Font("Consolas", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label_path.Location = new System.Drawing.Point(19, 144);
+            this.label_path.Margin = new System.Windows.Forms.Padding(7, 0, 7, 0);
+            this.label_path.Name = "label_path";
+            this.label_path.Size = new System.Drawing.Size(79, 36);
+            this.label_path.TabIndex = 38;
+            this.label_path.Text = "Path";
+            // 
+            // textBox_path
+            // 
+            this.textBox_path.Font = new System.Drawing.Font("Consolas", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.textBox_path.Location = new System.Drawing.Point(212, 138);
+            this.textBox_path.Margin = new System.Windows.Forms.Padding(7);
+            this.textBox_path.Name = "textBox_path";
+            this.textBox_path.Size = new System.Drawing.Size(779, 42);
+            this.textBox_path.TabIndex = 39;
+            this.textBox_path.Text = "D:\\powertrace";
+            // 
+            // button_openfold
+            // 
+            this.button_openfold.Font = new System.Drawing.Font("Consolas", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button_openfold.Location = new System.Drawing.Point(1005, 138);
+            this.button_openfold.Margin = new System.Windows.Forms.Padding(7);
+            this.button_openfold.Name = "button_openfold";
+            this.button_openfold.Size = new System.Drawing.Size(77, 45);
+            this.button_openfold.TabIndex = 40;
+            this.button_openfold.Text = "...";
+            this.button_openfold.UseVisualStyleBackColor = true;
+            this.button_openfold.Click += new System.EventHandler(this.button_openfold_Click);
+            // 
             // MainForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(14F, 27F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1500, 821);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(216F, 216F);
+            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
+            this.AutoScroll = true;
+            this.AutoSize = true;
+            this.ClientSize = new System.Drawing.Size(1500, 883);
+            this.Controls.Add(this.button_openfold);
+            this.Controls.Add(this.textBox_path);
+            this.Controls.Add(this.label_path);
             this.Controls.Add(this.checkBox_check);
             this.Controls.Add(this.checkBox_rewrite);
             this.Controls.Add(this.statusStrip_status);
@@ -564,8 +605,7 @@
             this.Controls.Add(this.comboBox_target);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.Margin = new System.Windows.Forms.Padding(7, 7, 7, 7);
-            this.MaximizeBox = false;
+            this.Margin = new System.Windows.Forms.Padding(7);
             this.Name = "MainForm";
             this.Text = "SAKURA Checker";
             this.Load += new System.EventHandler(this.MainForm_Load);
@@ -618,6 +658,9 @@
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel_message;
         private System.Windows.Forms.CheckBox checkBox_rewrite;
         private System.Windows.Forms.CheckBox checkBox_check;
+        private System.Windows.Forms.Label label_path;
+        private System.Windows.Forms.TextBox textBox_path;
+        private System.Windows.Forms.Button button_openfold;
     }
 }
 

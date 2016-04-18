@@ -69,7 +69,8 @@ namespace SAKURA
             targetModule.SetModeEncrypt(true);
             targetModule.SetKey(res.key);
             worker.ReportProgress(0, (object)res);
-            string fold = "C:\\powertrace\\C2power traces";
+            //string fold = "D:\\powertrace\\C2power traces";
+            string fold = res.path + "\\C2power traces";
             string filename;
 
             FileStream fs_pt = new FileStream("plaintext.txt", FileMode.Append);
@@ -255,6 +256,7 @@ namespace SAKURA
         public RandGen rand;
         public bool last;
         public bool check;
+        public string path;
         
 
         public ControllerArgs Clone()
