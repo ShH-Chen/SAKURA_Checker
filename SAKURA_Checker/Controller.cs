@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.ComponentModel;
 using System.IO;                                                                    // wanganl注：文件操作必须using这句
+using System.Diagnostics;
 
 namespace SAKURA
 {
@@ -12,6 +13,7 @@ namespace SAKURA
         private BackgroundWorker worker;
         private CipherModule targetModule;
         private AES pcModule;
+        private Stopwatch sw;
 
         public Controller()
         {
@@ -20,6 +22,7 @@ namespace SAKURA
             worker.WorkerSupportsCancellation = true;
             worker.DoWork += new DoWorkEventHandler(worker_DoWork);
             pcModule = new AES();
+            sw = new Stopwatch();
         }
 
         public void Open(uint index)
@@ -71,6 +74,7 @@ namespace SAKURA
             worker.ReportProgress(0, (object)res);
             //string fold = "D:\\powertrace\\C2power traces";
             string fold = res.path + "\\C2power traces";
+            string backupfold = res.path + "\\backup"+ "\\C2power traces";
             string filename;
 
             FileStream fs_pt = new FileStream("plaintext.txt", FileMode.Append);
@@ -80,14 +84,14 @@ namespace SAKURA
             StreamWriter sw_key = new StreamWriter(fs_key, Encoding.Default);
             StreamWriter sw_ct = new StreamWriter(fs_ct, Encoding.Default);
 
-            int inittime;
+            
             while (res.endless || res.current_trace < res.traces) {
                 res.answer = null;
                 res.ciphertext = null;
                 res.difference = null;
                 res.current_trace++;
-
-                inittime = System.Environment.TickCount;
+                sw.Reset();
+                sw.Start();
 
                 if (!res.endless)
                 {
@@ -101,9 +105,10 @@ namespace SAKURA
 
                 pcModule.Encrypt(ref res.answer, res.key, res.plaintext);
                 worker.ReportProgress(progress, (object)res);
+                double elapsed = 0.0;
                 if (args.check)
-                    targetModule.Run(ref res.ciphertext, res.plaintext, 0, ref res.elapsed);
-                else targetModule.Run(ref res.ciphertext, res.plaintext, args.wait, ref res.elapsed);
+                    targetModule.Run(ref res.ciphertext, res.plaintext, 0, ref elapsed);
+                else targetModule.Run(ref res.ciphertext, res.plaintext, args.wait, ref elapsed);
 
                 res.diff = Utils.differenceByteArray(ref res.difference, res.answer, res.ciphertext);
 
@@ -121,8 +126,8 @@ namespace SAKURA
                 bool skip = false;
                 if (args.check)
                 {
-                    filename = fold + (res.current_trace - 1).ToString("d5");
-                    filename = filename + ".dat";
+                    /*检测文件是否被创建*/
+                    filename = fold + (res.current_trace - 1).ToString("d5") + ".dat";
                     int startTime = Environment.TickCount;
                     while (File.Exists(filename) == false)
                     {
@@ -130,13 +135,22 @@ namespace SAKURA
                         int runtime = Environment.TickCount - startTime;
                         if (runtime > 1000) { skip = true; res.current_trace -= 1; break; }
                     }
-                    startTime = System.Environment.TickCount;
+                    /*把上一个文件移入backup文件夹*/
+                    if (res.current_trace >= 2 && File.Exists(fold + (res.current_trace - 2).ToString("d5")+".dat"))
+                    {
+                        File.Move(fold+(res.current_trace-2).ToString("d5") + ".dat", 
+                            backupfold+(res.current_trace-2).ToString("d5") + ".dat");
+                    }
+
+                    /*检测文件是否完成写入*/
+                    startTime = Environment.TickCount;
                     while (true)
                     {
                         try
                         {
-                            FileInfo file = new FileInfo(filename);
-                            if (file.Length > 100000) break;
+                            //  FileInfo file = new FileInfo(filename);
+                            //  if (file.Length > 100000) break;
+                            if (fileisOpen(filename) == false) break;
                             int runtime = Environment.TickCount - startTime;
                             if (runtime > 1000) { break; }
                         }
@@ -145,6 +159,8 @@ namespace SAKURA
                     }
                     System.Threading.Thread.Sleep(args.wait);
                 }
+                sw.Stop();
+                res.elapsed = ((double)sw.ElapsedMilliseconds) / 1000;
                 //wanganl_FileWrite(temp_num); // wanganl：把每次加密的编号（4位16进制数）写入data.txt
                 if (skip == false)
                 {
@@ -176,7 +192,7 @@ namespace SAKURA
                     progress = 100;
                     break;
                 }
-                res.elapsed = (double)(Environment.TickCount - inittime)/1000;
+             
 
             }   //while loop end here
 
@@ -233,7 +249,31 @@ namespace SAKURA
             //sw.Close();
             //fs.Close();
         }   // shenal注：自定义文件存储函数结束
-        //********************************************************************************************************************************
+            //********************************************************************************************************************************
+        public bool fileisOpen(string fileName)
+        {
+            bool inUse = true;
+            FileStream fs = null;
+            try
+            {
+                fs = new FileStream(fileName, FileMode.Open, FileAccess.Read, FileShare.None);
+                inUse = false;
+            }
+            catch (System.IO.FileNotFoundException)
+            {
+                inUse = false;
+            }
+            catch
+            {
+                inUse = true;
+            }
+            finally
+            {
+                if (fs != null)
+                    fs.Close();
+            }
+            return inUse;
+        }
     }
 
     public struct ControllerArgs

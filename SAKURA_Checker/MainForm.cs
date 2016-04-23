@@ -316,6 +316,11 @@ namespace SAKURA_Checker
                     fs_pt.Close();
                 }
 
+                if (Directory.Exists(args.path + "\\backup") == false)
+                {
+                    Directory.CreateDirectory(args.path + "\\backup");
+                }
+
                 //随机数生成，在每次重新run的时候重新随机获取种子
                 Random randc = new Random();
                 RandGen randb = new RandGen(randc.Next(887667), randc.Next(434343));
