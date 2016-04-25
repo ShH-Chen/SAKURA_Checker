@@ -58,7 +58,7 @@ namespace SAKURA
         {
             while (bus.SbusRead((uint)Address.CONT) != 0x0000)
             {
-                System.Threading.Thread.Sleep(0);
+                System.Threading.Thread.Sleep(10);
             }
         }
 

@@ -113,16 +113,6 @@ namespace SAKURA
                 res.diff = Utils.differenceByteArray(ref res.difference, res.answer, res.ciphertext);
 
                 //***************************************************************************************************************************
-                // wanganl注：把res.current_trace这个编号转换为byte[]型，然后写入data.txt
-                byte[] temp_num = new byte[2];
-                temp_num[0] = (byte)(System.Math.Floor((double)(res.current_trace / 256)) % 256);
-                temp_num[1] = (byte)(res.current_trace % 256);
-
-                //wanganl_FileWrite(temp_num);                                        // wanganl注：把每次加密的编号（4位16进制数）写入data.txt
-                //wanganl_FileWrite(res.key);                                         // wanganl注：把密钥写入data.txt
-                //wanganl_FileWrite(res.plaintext);                                   // wanganl注：把明文写入data.txt
-                //wanganl_FileWrite(res.plaintext_mask);                              // wanganl注：把明文掩码写入data.txt
-                //wanganl_FileWrite(res.ciphertext);                                  // wanganl注：把密文写入data.txt
                 bool skip = false;
                 if (args.check)
                 {
