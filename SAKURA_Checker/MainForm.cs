@@ -73,6 +73,7 @@ namespace SAKURA_Checker
             state = appState.Stop;
             updateFormEnabling();
             ctrl.Cancel();
+            textBox_CurrentNum.Text =  textBox_rtraces.Text;
         }
 
         private void textBox_key_Leave(object sender, EventArgs e)
@@ -172,6 +173,7 @@ namespace SAKURA_Checker
                     checkBox_check.Enabled = true;
                     checkBox_rewrite.Enabled = true;
                     textBox_path.Enabled = true;
+                    textBox_CurrentNum.Enabled = true;
                     break;
 
                 case appState.Start:
@@ -194,6 +196,7 @@ namespace SAKURA_Checker
                     checkBox_check.Enabled = false;
                     checkBox_rewrite.Enabled = false;
                     textBox_path.Enabled = false;
+                    textBox_CurrentNum.Enabled = false;
                     break;
 
                 case appState.Running:
@@ -216,6 +219,7 @@ namespace SAKURA_Checker
                     checkBox_check.Enabled = false;
                     checkBox_rewrite.Enabled = false;
                     textBox_path.Enabled = false;
+                    textBox_CurrentNum.Enabled = false;
                     break;
 
                 case appState.Stop:
@@ -238,6 +242,7 @@ namespace SAKURA_Checker
                     checkBox_check.Enabled = false;
                     checkBox_rewrite.Enabled = false;
                     textBox_path.Enabled = false;
+                    textBox_CurrentNum.Enabled = false;
                     break;
             }
         }
@@ -306,6 +311,7 @@ namespace SAKURA_Checker
                 args.continueIfError = checkBox_continueiferror.Checked;
                 args.check = !checkBox_check.Checked;
                 args.path = textBox_path.Text;
+                args.CurrentNum = Convert.ToInt64(textBox_CurrentNum.Text);
                 if (checkBox_rewrite.Checked)
                 {
                     FileStream fs_ct = new FileStream("ciphertext.txt", FileMode.Create);

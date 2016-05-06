@@ -66,7 +66,7 @@ namespace SAKURA
             // initialize
             res.last = false;
             res.error = false;
-            res.current_trace = 0;
+            res.current_trace = res.CurrentNum;
             pcModule.SetKey(res.key);
             targetModule.Reset();
             targetModule.SetModeEncrypt(true);
@@ -109,7 +109,7 @@ namespace SAKURA
                 if (args.check)
                     targetModule.Run(ref res.ciphertext, res.plaintext, 0, ref elapsed);
                 else targetModule.Run(ref res.ciphertext, res.plaintext, args.wait, ref elapsed);
-
+                
                 res.diff = Utils.differenceByteArray(ref res.difference, res.answer, res.ciphertext);
 
                 //***************************************************************************************************************************
@@ -287,6 +287,7 @@ namespace SAKURA
         public bool last;
         public bool check;
         public string path;
+        public long CurrentNum;
         
 
         public ControllerArgs Clone()

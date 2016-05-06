@@ -72,6 +72,8 @@
             this.label_path = new System.Windows.Forms.Label();
             this.textBox_path = new System.Windows.Forms.TextBox();
             this.button_openfold = new System.Windows.Forms.Button();
+            this.labelCurrentNum = new System.Windows.Forms.Label();
+            this.textBox_CurrentNum = new System.Windows.Forms.TextBox();
             this.statusStrip_status.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -157,8 +159,6 @@
             // checkBox_endless
             // 
             this.checkBox_endless.AutoSize = true;
-            this.checkBox_endless.Checked = true;
-            this.checkBox_endless.CheckState = System.Windows.Forms.CheckState.Checked;
             this.checkBox_endless.Font = new System.Drawing.Font("Consolas", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.checkBox_endless.Location = new System.Drawing.Point(460, 204);
             this.checkBox_endless.Margin = new System.Windows.Forms.Padding(7);
@@ -555,6 +555,28 @@
             this.button_openfold.UseVisualStyleBackColor = true;
             this.button_openfold.Click += new System.EventHandler(this.button_openfold_Click);
             // 
+            // labelCurrentNum
+            // 
+            this.labelCurrentNum.AutoSize = true;
+            this.labelCurrentNum.Font = new System.Drawing.Font("Consolas", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelCurrentNum.Location = new System.Drawing.Point(652, 203);
+            this.labelCurrentNum.Margin = new System.Windows.Forms.Padding(7, 0, 7, 0);
+            this.labelCurrentNum.Name = "labelCurrentNum";
+            this.labelCurrentNum.Size = new System.Drawing.Size(175, 36);
+            this.labelCurrentNum.TabIndex = 41;
+            this.labelCurrentNum.Text = "CurrentNum";
+            // 
+            // textBox_CurrentNum
+            // 
+            this.textBox_CurrentNum.Font = new System.Drawing.Font("Consolas", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.textBox_CurrentNum.Location = new System.Drawing.Point(831, 198);
+            this.textBox_CurrentNum.Margin = new System.Windows.Forms.Padding(7);
+            this.textBox_CurrentNum.Name = "textBox_CurrentNum";
+            this.textBox_CurrentNum.Size = new System.Drawing.Size(160, 42);
+            this.textBox_CurrentNum.TabIndex = 42;
+            this.textBox_CurrentNum.Text = "0";
+            this.textBox_CurrentNum.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(216F, 216F);
@@ -562,6 +584,8 @@
             this.AutoScroll = true;
             this.AutoSize = true;
             this.ClientSize = new System.Drawing.Size(1500, 883);
+            this.Controls.Add(this.textBox_CurrentNum);
+            this.Controls.Add(this.labelCurrentNum);
             this.Controls.Add(this.button_openfold);
             this.Controls.Add(this.textBox_path);
             this.Controls.Add(this.label_path);
@@ -661,6 +685,8 @@
         private System.Windows.Forms.Label label_path;
         private System.Windows.Forms.TextBox textBox_path;
         private System.Windows.Forms.Button button_openfold;
+        private System.Windows.Forms.Label labelCurrentNum;
+        private System.Windows.Forms.TextBox textBox_CurrentNum;
     }
 }
 
