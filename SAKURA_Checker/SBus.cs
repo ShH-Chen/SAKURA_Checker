@@ -18,6 +18,11 @@ namespace SAKURA
             this.rif.open();
         }
 
+        public void open()
+        {
+            this.rif.open();
+        }
+
         public void Dispose()
         {
             this.rif.close();

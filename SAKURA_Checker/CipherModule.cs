@@ -17,6 +17,11 @@ namespace SAKURA
             sw = new Stopwatch();
         }
 
+        public void open()
+        {
+            bus.open();
+        }
+
         public void Dispose()
         {
             bus.Dispose();

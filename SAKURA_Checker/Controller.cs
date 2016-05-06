@@ -93,6 +93,16 @@ namespace SAKURA
                 sw.Reset();
                 sw.Start();
 
+                if (res.current_trace % 1000 == 0)
+                {
+                    targetModule.Dispose();
+                    targetModule.Reset();
+                    targetModule.SetModeEncrypt(true);
+                    targetModule.SetKey(res.key);
+                    targetModule.open();
+                }
+
+
                 if (!res.endless)
                 {
                     progress = (int)(100 * res.current_trace / res.traces);
@@ -109,7 +119,7 @@ namespace SAKURA
                 if (args.check)
                     targetModule.Run(ref res.ciphertext, res.plaintext, 0, ref elapsed);
                 else targetModule.Run(ref res.ciphertext, res.plaintext, args.wait, ref elapsed);
-                
+
                 res.diff = Utils.differenceByteArray(ref res.difference, res.answer, res.ciphertext);
 
                 //***************************************************************************************************************************
