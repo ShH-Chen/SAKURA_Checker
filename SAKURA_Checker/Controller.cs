@@ -100,6 +100,19 @@ namespace SAKURA
                     targetModule.SetModeEncrypt(true);
                     targetModule.SetKey(res.key);
                     targetModule.open();
+                    sw_ct.Close();
+                    sw_key.Close();
+                    sw_pt.Close();
+                    fs_ct.Close();
+                    fs_pt.Close();
+                    fs_key.Close();
+
+                    fs_pt = new FileStream("plaintext.txt", FileMode.Append);
+                    fs_key = new FileStream("key.txt", FileMode.Append);
+                    fs_ct = new FileStream("ciphertext.txt", FileMode.Append);
+                    sw_pt = new StreamWriter(fs_pt, Encoding.Default);
+                    sw_key = new StreamWriter(fs_key, Encoding.Default);
+                    sw_ct = new StreamWriter(fs_ct, Encoding.Default);
                 }
 
 

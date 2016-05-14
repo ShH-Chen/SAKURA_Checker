@@ -74,6 +74,7 @@
             this.button_openfold = new System.Windows.Forms.Button();
             this.labelCurrentNum = new System.Windows.Forms.Label();
             this.textBox_CurrentNum = new System.Windows.Forms.TextBox();
+            this.button_about = new System.Windows.Forms.Button();
             this.statusStrip_status.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -131,7 +132,7 @@
             this.textBox_traces.Name = "textBox_traces";
             this.textBox_traces.Size = new System.Drawing.Size(228, 42);
             this.textBox_traces.TabIndex = 5;
-            this.textBox_traces.Text = "1000";
+            this.textBox_traces.Text = "50000";
             this.textBox_traces.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // label_key
@@ -247,7 +248,7 @@
             this.textBox_wait.Name = "textBox_wait";
             this.textBox_wait.Size = new System.Drawing.Size(228, 42);
             this.textBox_wait.TabIndex = 16;
-            this.textBox_wait.Text = "0";
+            this.textBox_wait.Text = "100";
             this.textBox_wait.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // button_single
@@ -577,6 +578,17 @@
             this.textBox_CurrentNum.Text = "0";
             this.textBox_CurrentNum.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
+            // button_about
+            // 
+            this.button_about.Font = new System.Drawing.Font("Consolas", 9.75F);
+            this.button_about.Location = new System.Drawing.Point(1160, 27);
+            this.button_about.Name = "button_about";
+            this.button_about.Size = new System.Drawing.Size(122, 51);
+            this.button_about.TabIndex = 43;
+            this.button_about.Text = "about";
+            this.button_about.UseVisualStyleBackColor = true;
+            this.button_about.Click += new System.EventHandler(this.button_about_Click);
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(216F, 216F);
@@ -584,6 +596,7 @@
             this.AutoScroll = true;
             this.AutoSize = true;
             this.ClientSize = new System.Drawing.Size(1500, 883);
+            this.Controls.Add(this.button_about);
             this.Controls.Add(this.textBox_CurrentNum);
             this.Controls.Add(this.labelCurrentNum);
             this.Controls.Add(this.button_openfold);
@@ -687,6 +700,7 @@
         private System.Windows.Forms.Button button_openfold;
         private System.Windows.Forms.Label labelCurrentNum;
         private System.Windows.Forms.TextBox textBox_CurrentNum;
+        private System.Windows.Forms.Button button_about;
     }
 }
 

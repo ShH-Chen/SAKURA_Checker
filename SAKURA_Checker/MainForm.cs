@@ -73,7 +73,6 @@ namespace SAKURA_Checker
             state = appState.Stop;
             updateFormEnabling();
             ctrl.Cancel();
-            textBox_CurrentNum.Text =  textBox_rtraces.Text;
         }
 
         private void textBox_key_Leave(object sender, EventArgs e)
@@ -366,6 +365,12 @@ namespace SAKURA_Checker
                 textBox_path.Text = foldPath;
                 //MessageBox.Show("Selected Fold:" + textBox_path.Text, "选择文件夹提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
+        }
+
+        private void button_about_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show("版本：1.0.0 ReleaseTime: 2016/5/7 16:04\n"+
+                            "\t每1000条重置串口" );
         }
     }
 }
