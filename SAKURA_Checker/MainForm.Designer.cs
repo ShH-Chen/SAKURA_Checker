@@ -75,6 +75,7 @@
             this.labelCurrentNum = new System.Windows.Forms.Label();
             this.textBox_CurrentNum = new System.Windows.Forms.TextBox();
             this.button_about = new System.Windows.Forms.Button();
+            this.comboBox1 = new System.Windows.Forms.ComboBox();
             this.statusStrip_status.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -589,6 +590,19 @@
             this.button_about.UseVisualStyleBackColor = true;
             this.button_about.Click += new System.EventHandler(this.button_about_Click);
             // 
+            // comboBox1
+            // 
+            this.comboBox1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboBox1.Font = new System.Drawing.Font("Consolas", 9.75F);
+            this.comboBox1.FormattingEnabled = true;
+            this.comboBox1.Items.AddRange(new object[] {
+            "AES",
+            "DES"});
+            this.comboBox1.Location = new System.Drawing.Point(844, 20);
+            this.comboBox1.Name = "comboBox1";
+            this.comboBox1.Size = new System.Drawing.Size(147, 42);
+            this.comboBox1.TabIndex = 44;
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(216F, 216F);
@@ -596,6 +610,7 @@
             this.AutoScroll = true;
             this.AutoSize = true;
             this.ClientSize = new System.Drawing.Size(1500, 883);
+            this.Controls.Add(this.comboBox1);
             this.Controls.Add(this.button_about);
             this.Controls.Add(this.textBox_CurrentNum);
             this.Controls.Add(this.labelCurrentNum);
@@ -701,6 +716,7 @@
         private System.Windows.Forms.Label labelCurrentNum;
         private System.Windows.Forms.TextBox textBox_CurrentNum;
         private System.Windows.Forms.Button button_about;
+        private System.Windows.Forms.ComboBox comboBox1;
     }
 }
 

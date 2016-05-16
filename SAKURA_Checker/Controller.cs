@@ -13,6 +13,7 @@ namespace SAKURA
         private BackgroundWorker worker;
         private CipherModule targetModule;
         private AES pcModule;
+        private DES DESCrypto;
         private Stopwatch sw;
 
         public Controller()
@@ -22,6 +23,7 @@ namespace SAKURA
             worker.WorkerSupportsCancellation = true;
             worker.DoWork += new DoWorkEventHandler(worker_DoWork);
             pcModule = new AES();
+            DESCrypto = new DES();
             sw = new Stopwatch();
         }
 
@@ -68,6 +70,7 @@ namespace SAKURA
             res.error = false;
             res.current_trace = res.CurrentNum;
             pcModule.SetKey(res.key);
+            DESCrypto.SetKey(res.key);
             targetModule.Reset();
             targetModule.SetModeEncrypt(true);
             targetModule.SetKey(res.key);
@@ -86,6 +89,8 @@ namespace SAKURA
 
             
             while (res.endless || res.current_trace < res.traces) {
+                int bytenum = 0;
+                double elapsed = 0.0;
                 res.answer = null;
                 res.ciphertext = null;
                 res.difference = null;
@@ -121,20 +126,36 @@ namespace SAKURA
                     progress = (int)(100 * res.current_trace / res.traces);
                 }
 
-                if (res.randomGeneration)
+                if (res.Algorithm == "AES")
                 {
-                    res.plaintext = res.rand.generatePlaintext();
+                    bytenum = 16;
+                    if (res.randomGeneration)
+                    {
+                        res.plaintext = res.rand.generatePlaintext(bytenum);
+                    }
+                    pcModule.Encrypt(ref res.answer, res.key, res.plaintext);
+                    if (args.check)
+                        targetModule.RunAES(ref res.ciphertext, res.plaintext, 0, ref elapsed);
+                    else targetModule.RunAES(ref res.ciphertext, res.plaintext, args.wait, ref elapsed);
                 }
-
-                pcModule.Encrypt(ref res.answer, res.key, res.plaintext);
-                worker.ReportProgress(progress, (object)res);
-                double elapsed = 0.0;
-                if (args.check)
-                    targetModule.Run(ref res.ciphertext, res.plaintext, 0, ref elapsed);
-                else targetModule.Run(ref res.ciphertext, res.plaintext, args.wait, ref elapsed);
-
+                else if (res.Algorithm == "DES")
+                {
+                    bytenum = 8;
+                    if (res.randomGeneration)
+                    {
+                        res.plaintext = res.rand.generatePlaintext(bytenum);
+                    }
+                    DESCrypto.Encrypt(ref res.answer, res.plaintext);
+                    if (args.check)
+                        targetModule.RunDES(ref res.ciphertext, res.plaintext, 0, ref elapsed);
+                    else targetModule.RunDES(ref res.ciphertext, res.plaintext, args.wait, ref elapsed);
+                }
+                else break;
+            
                 res.diff = Utils.differenceByteArray(ref res.difference, res.answer, res.ciphertext);
 
+
+                worker.ReportProgress(progress, (object)res);
                 //***************************************************************************************************************************
                 bool skip = false;
                 if (args.check)
@@ -255,12 +276,12 @@ namespace SAKURA
                     strB.Append(byte_buffer[i].ToString("X2"));
                 hex_String = strB.ToString();
             }
-            //FileStream fs = new FileStream("plaintext.txt", FileMode.Append);
-           // StreamWriter sw = new StreamWriter(fs, Encoding.Default);
+            while (hex_String.Length < 32)
+            {
+                hex_String = hex_String + "0";
+            }
             sw.Write(hex_String);
             sw.Write("\r\n");                                                       // shenal注：\r是光标去下行开头，\n是换行
-            //sw.Close();
-            //fs.Close();
         }   // shenal注：自定义文件存储函数结束
             //********************************************************************************************************************************
         public bool fileisOpen(string fileName)
@@ -308,9 +329,11 @@ namespace SAKURA
         public double elapsed;
         public RandGen rand;
         public bool last;
+        //add by chens
         public bool check;
         public string path;
         public long CurrentNum;
+        public string Algorithm;
         
 
         public ControllerArgs Clone()

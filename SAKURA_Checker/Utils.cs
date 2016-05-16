@@ -53,7 +53,8 @@ namespace SAKURA
         public static bool differenceByteArray(ref byte[] difference, byte[] input1, byte[] input2)
         {
             bool diff = false;
-            difference = new byte[16];
+            int length = input1.Length;
+            difference = new byte[length];
 
             for (int i = 0; i < difference.Length; i++)
             {

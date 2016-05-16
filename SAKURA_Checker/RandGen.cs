@@ -30,10 +30,10 @@ namespace SAKURA
             randPlaintext = new Random(seedPlaintext);
         }
 
-        public byte[] generatePlaintext()
+        public byte[] generatePlaintext(int num)
         {
-            byte[] plaintext = new byte[16];
-            for (int i = 0; i < 16; i++)
+            byte[] plaintext = new byte[num];
+            for (int i = 0; i < num; i++)
             {
                 plaintext[i] = (byte)randPlaintext.Next(256);
             }

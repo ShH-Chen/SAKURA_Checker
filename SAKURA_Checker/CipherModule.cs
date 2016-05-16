@@ -45,7 +45,7 @@ namespace SAKURA
             WaitDone();
         }
 
-        public void Run(ref byte[] outputtext, byte[] inputtext, int wait, ref double elapsedMillisecond)
+        public void RunAES(ref byte[] outputtext, byte[] inputtext, int wait, ref double elapsedMillisecond)
         {
             bus.SbusWriteBurst((uint)(Address.ITEXT0 + 0x0020), inputtext, inputtext.Length);
             sw.Reset();
@@ -58,6 +58,21 @@ namespace SAKURA
             bus.SbusReadBurst((uint)Address.OTEXT0, outputtext, outputtext.Length);
             elapsedMillisecond = sw.Elapsed.TotalMilliseconds;
         }
+
+        public void RunDES(ref byte[] outputtext, byte[] inputtext, int wait, ref double elapsedMillisecond)
+        {
+            bus.SbusWriteBurst((uint)(Address.ITEXT0 + 0x0020), inputtext, inputtext.Length);
+            sw.Reset();
+            sw.Start();
+            bus.SbusWrite((uint)Address.CONT, (uint)Cont.RUN);
+            System.Threading.Thread.Sleep(wait);
+            WaitDone();
+            sw.Stop();
+            outputtext = new byte[8];
+            bus.SbusReadBurst((uint)Address.OTEXT0, outputtext, outputtext.Length);
+            elapsedMillisecond = sw.Elapsed.TotalMilliseconds;
+        }
+
 
         private void WaitDone()
         {

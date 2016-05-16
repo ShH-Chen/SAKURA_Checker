@@ -25,6 +25,7 @@ namespace SAKURA_Checker
         {
             InitializeComponent();
             comboBox_target.SelectedIndex = 0;
+            comboBox1.SelectedIndex = 0;
             updateFormEnabling();
             ctrl = new Controller();
             Random randa = new Random();
@@ -51,7 +52,10 @@ namespace SAKURA_Checker
 
         private void button_changeplaintext_Click(object sender, EventArgs e)
         {
-            textBox_plaintext.Text = Utils.byteArrayToString(rand.generatePlaintext());
+            int bytenum = 16;
+            if (args.Algorithm == "AES") bytenum = 16;
+            else if (args.Algorithm == "DES") bytenum = 8;
+            textBox_plaintext.Text = Utils.byteArrayToString(rand.generatePlaintext(bytenum));
         }
 
         private void button_single_Click(object sender, EventArgs e)
@@ -173,6 +177,7 @@ namespace SAKURA_Checker
                     checkBox_rewrite.Enabled = true;
                     textBox_path.Enabled = true;
                     textBox_CurrentNum.Enabled = true;
+                    comboBox1.Enabled = true;
                     break;
 
                 case appState.Start:
@@ -196,6 +201,7 @@ namespace SAKURA_Checker
                     checkBox_rewrite.Enabled = false;
                     textBox_path.Enabled = false;
                     textBox_CurrentNum.Enabled = false;
+                    comboBox1.Enabled = false;
                     break;
 
                 case appState.Running:
@@ -219,6 +225,7 @@ namespace SAKURA_Checker
                     checkBox_rewrite.Enabled = false;
                     textBox_path.Enabled = false;
                     textBox_CurrentNum.Enabled = false;
+                    comboBox1.Enabled = false;
                     break;
 
                 case appState.Stop:
@@ -242,6 +249,7 @@ namespace SAKURA_Checker
                     checkBox_rewrite.Enabled = false;
                     textBox_path.Enabled = false;
                     textBox_CurrentNum.Enabled = false;
+                    comboBox1.Enabled = false;
                     break;
             }
         }
@@ -311,6 +319,7 @@ namespace SAKURA_Checker
                 args.check = !checkBox_check.Checked;
                 args.path = textBox_path.Text;
                 args.CurrentNum = Convert.ToInt64(textBox_CurrentNum.Text);
+                args.Algorithm = comboBox1.SelectedItem.ToString();
                 if (checkBox_rewrite.Checked)
                 {
                     FileStream fs_ct = new FileStream("ciphertext.txt", FileMode.Create);
