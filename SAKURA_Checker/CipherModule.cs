@@ -17,7 +17,6 @@ namespace SAKURA
 
         public void open()
         {
-            bus.restartInTask();
             bus.open();
         }
 

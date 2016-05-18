@@ -93,17 +93,12 @@ namespace SAKURA
                 sw.Reset();
                 sw.Start();
 
+                /*
                 if (res.current_trace % 1000 == 0)
                 {
-                    targetModule.Dispose();
-                    targetModule.Reset();
-                    targetModule.SetModeEncrypt(true);
-                    targetModule.SetKey(res.key);
-                    targetModule.open();
-
                     filewrite.closefile();
                     filewrite.openfile();
-                }
+                }*/
 
 
                 if (!res.endless)
