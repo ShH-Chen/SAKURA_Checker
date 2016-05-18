@@ -86,7 +86,6 @@ namespace SAKURA
            
             while (res.endless || res.current_trace < res.traces) {
                 int bytenum = 0;
-                double elapsed = 0.0;
                 res.answer = null;
                 res.ciphertext = null;
                 res.difference = null;
@@ -121,8 +120,8 @@ namespace SAKURA
                     }
                     pcModule.Encrypt(ref res.answer, res.key, res.plaintext);
                     if (args.check)
-                        targetModule.RunAES(ref res.ciphertext, res.plaintext, 0, ref elapsed);
-                    else targetModule.RunAES(ref res.ciphertext, res.plaintext, args.wait, ref elapsed);
+                        targetModule.RunAES(ref res.ciphertext, res.plaintext, 0);
+                    else targetModule.RunAES(ref res.ciphertext, res.plaintext, args.wait);
                 }
                 else if (res.Algorithm == "DES")
                 {
@@ -133,8 +132,8 @@ namespace SAKURA
                     }
                     DESCrypto.Encrypt(ref res.answer, res.plaintext);
                     if (args.check)
-                        targetModule.RunDES(ref res.ciphertext, res.plaintext, 0, ref elapsed);
-                    else targetModule.RunDES(ref res.ciphertext, res.plaintext, args.wait, ref elapsed);
+                        targetModule.RunDES(ref res.ciphertext, res.plaintext, 0);
+                    else targetModule.RunDES(ref res.ciphertext, res.plaintext, args.wait);
                 }
                 else break;
             

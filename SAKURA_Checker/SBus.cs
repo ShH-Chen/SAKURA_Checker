@@ -11,6 +11,7 @@ namespace SAKURA
         private const int MAX_BUF = 8192;
         private byte[] wbuf = new byte[MAX_BUF];
         private byte[] rbuf = new byte[MAX_BUF];
+        private int sbusIsStop = 0;
 
         public SBus(uint index)
         {
@@ -21,6 +22,16 @@ namespace SAKURA
         public void open()
         {
             this.rif.open();
+        }
+
+        public void stopInTask()
+        {
+            if (sbusIsStop == 0) { this.rif.stopInTask(); sbusIsStop = 1; }            
+        }
+
+        public void restartInTask()
+        {
+            if (sbusIsStop == 1) { this.rif.restartInTask(); sbusIsStop = 0; }
         }
 
         public void Dispose()

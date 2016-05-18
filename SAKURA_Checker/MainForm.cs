@@ -378,8 +378,8 @@ namespace SAKURA_Checker
 
         private void button_about_Click(object sender, EventArgs e)
         {
-            MessageBox.Show("版本：1.0.0 ReleaseTime: 2016/5/7 16:04\n"+
-                            "\t每1000条重置串口" );
+            MessageBox.Show("版本：1.0.0 ReleaseTime: 2016/5/18 16:28\n"+
+                            "\t降低CPU利用率" );
         }
     }
 }

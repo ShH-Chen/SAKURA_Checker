@@ -13,6 +13,8 @@ namespace SAKURA
         void close();
         void read(byte[] buf, int len);
         void write(byte[] buf, int len);
+        void stopInTask();
+        void restartInTask();
     }
 
     class FT245 : RawInterface
@@ -41,7 +43,6 @@ namespace SAKURA
             }
              */
             st = ftdi.OpenByIndex(index);
-
             if (st != FTDI.FT_STATUS.FT_OK)
             {
                 throw new SystemException(string.Format("Failed to open device {0}. ({1})", index, st.ToString()));
@@ -51,6 +52,16 @@ namespace SAKURA
             ftdi.Purge(FTDI.FT_PURGE.FT_PURGE_RX | FTDI.FT_PURGE.FT_PURGE_TX);
             ftdi.SetTimeouts(ReadTimeoutMilliseconds, WriteTimeoutMilliseconds);
             ftdi.SetLatency(LatencyMilliseconds);
+        }
+
+        public void stopInTask()
+        {
+            ftdi.StopInTask();
+        }
+
+        public void restartInTask()
+        {
+            ftdi.RestartInTask();
         }
 
         public void close()
