@@ -15,6 +15,7 @@ namespace SAKURA
         private AES pcModule;
         private DES DESCrypto;
         private Stopwatch sw;
+        private Filewriter filewrite;
 
         public Controller()
         {
@@ -25,6 +26,7 @@ namespace SAKURA
             pcModule = new AES();
             DESCrypto = new DES();
             sw = new Stopwatch();
+            filewrite = new Filewriter();
         }
 
         public void Open(uint index)
@@ -80,14 +82,8 @@ namespace SAKURA
             string backupfold = res.path + "\\backup"+ "\\C2power traces";
             string filename;
 
-            FileStream fs_pt = new FileStream("plaintext.txt", FileMode.Append);
-            FileStream fs_key = new FileStream("key.txt", FileMode.Append);
-            FileStream fs_ct = new FileStream("ciphertext.txt", FileMode.Append);
-            StreamWriter sw_pt = new StreamWriter(fs_pt, Encoding.Default);
-            StreamWriter sw_key = new StreamWriter(fs_key, Encoding.Default);
-            StreamWriter sw_ct = new StreamWriter(fs_ct, Encoding.Default);
-
-            
+            filewrite.openfile();
+           
             while (res.endless || res.current_trace < res.traces) {
                 int bytenum = 0;
                 double elapsed = 0.0;
@@ -105,19 +101,9 @@ namespace SAKURA
                     targetModule.SetModeEncrypt(true);
                     targetModule.SetKey(res.key);
                     targetModule.open();
-                    sw_ct.Close();
-                    sw_key.Close();
-                    sw_pt.Close();
-                    fs_ct.Close();
-                    fs_pt.Close();
-                    fs_key.Close();
 
-                    fs_pt = new FileStream("plaintext.txt", FileMode.Append);
-                    fs_key = new FileStream("key.txt", FileMode.Append);
-                    fs_ct = new FileStream("ciphertext.txt", FileMode.Append);
-                    sw_pt = new StreamWriter(fs_pt, Encoding.Default);
-                    sw_key = new StreamWriter(fs_key, Encoding.Default);
-                    sw_ct = new StreamWriter(fs_ct, Encoding.Default);
+                    filewrite.closefile();
+                    filewrite.openfile();
                 }
 
 
@@ -155,7 +141,6 @@ namespace SAKURA
                 res.diff = Utils.differenceByteArray(ref res.difference, res.answer, res.ciphertext);
 
 
-                worker.ReportProgress(progress, (object)res);
                 //***************************************************************************************************************************
                 bool skip = false;
                 if (args.check)
@@ -198,9 +183,7 @@ namespace SAKURA
                 //wanganl_FileWrite(temp_num); // wanganl：把每次加密的编号（4位16进制数）写入data.txt
                 if (skip == false)
                 {
-                    FileWrite(res.key,sw_key);                                             // shenal注：把密钥写入data.txt
-                    FileWrite(res.plaintext,sw_pt);                                   // shenal注：把明文写入data.txt
-                    FileWrite(res.ciphertext,sw_ct);                                  // shenal注：把密文写入data.txt
+                    filewrite.write(res.plaintext,res.key,res.ciphertext);
                 }
                 //****************************************************************************************************************************
 
@@ -214,28 +197,19 @@ namespace SAKURA
                         break;
                     }
                 }
-
                 if (worker.CancellationPending)
                 {
                     e.Cancel = true;
                     break;
                 }
-
                 if (res.single)
                 {
                     progress = 100;
                     break;
-                }
-             
-
+                }             
             }   //while loop end here
 
-            sw_ct.Close();
-            sw_key.Close();
-            sw_pt.Close();
-            fs_ct.Close();
-            fs_pt.Close();
-            fs_key.Close();
+            filewrite.closefile();
 
             res.last = true;
             worker.ReportProgress(progress, (object)res);
