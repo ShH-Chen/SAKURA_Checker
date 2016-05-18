@@ -58,7 +58,7 @@ namespace SAKURA
             bus.SbusReadBurst((uint)Address.OTEXT0, outputtext, outputtext.Length);
 
             bus.stopInTask();
-            if (wait>50) System.Threading.Thread.Sleep(wait-50);
+            System.Threading.Thread.Sleep(wait);
         }
 
         public void RunDES(ref byte[] outputtext, byte[] inputtext, int wait)
@@ -72,7 +72,7 @@ namespace SAKURA
             bus.SbusReadBurst((uint)Address.OTEXT0, outputtext, outputtext.Length);
 
             bus.stopInTask();
-            if (wait > 50) System.Threading.Thread.Sleep(wait - 50);
+            System.Threading.Thread.Sleep(wait);
         }
 
 

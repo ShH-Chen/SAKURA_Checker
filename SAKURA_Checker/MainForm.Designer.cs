@@ -457,13 +457,13 @@
             // label_relapsed_ms
             // 
             this.label_relapsed_ms.AutoSize = true;
-            this.label_relapsed_ms.Font = new System.Drawing.Font("Consolas", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label_relapsed_ms.Location = new System.Drawing.Point(460, 562);
+            this.label_relapsed_ms.Font = new System.Drawing.Font("Consolas", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label_relapsed_ms.Location = new System.Drawing.Point(445, 555);
             this.label_relapsed_ms.Margin = new System.Windows.Forms.Padding(7, 0, 7, 0);
             this.label_relapsed_ms.Name = "label_relapsed_ms";
-            this.label_relapsed_ms.Size = new System.Drawing.Size(47, 36);
+            this.label_relapsed_ms.Size = new System.Drawing.Size(38, 42);
             this.label_relapsed_ms.TabIndex = 26;
-            this.label_relapsed_ms.Text = "ms";
+            this.label_relapsed_ms.Text = "s";
             // 
             // textBox_interface
             // 
