@@ -83,6 +83,8 @@ namespace SAKURA
             string filename;
 
             filewrite.openfile();
+            Filemove filemove = new Filemove(res.path);
+            filemove.open(0);
            
             while (res.endless || res.current_trace < res.traces) {
                 int bytenum = 0;
@@ -141,35 +143,34 @@ namespace SAKURA
                 {
                     /*检测文件是否被创建*/
                     filename = fold + (res.current_trace - 1).ToString("d5") + ".dat";
-                    int startTime = Environment.TickCount;
+                    Stopwatch timeout = new Stopwatch();
                     while (File.Exists(filename) == false)
                     {
                         System.Threading.Thread.Sleep(10);
-                        int runtime = Environment.TickCount - startTime;
-                        if (runtime > 1000) { skip = true; res.current_trace -= 1; break; }
+                        timeout.Stop();
+                        if (timeout.ElapsedMilliseconds > 1000) { skip = true; res.current_trace -= 1; break; }
+                        else { timeout.Start(); }
                     }
-                    /*把上一个文件移入backup文件夹*/
-                    if (res.current_trace >= 2 && File.Exists(fold + (res.current_trace - 2).ToString("d5")+".dat"))
-                    {
-                        File.Move(fold+(res.current_trace-2).ToString("d5") + ".dat", 
-                            backupfold+(res.current_trace-2).ToString("d5") + ".dat");
-                    }
+                    if (timeout.IsRunning == true) { timeout.Stop(); }
+
+                    /*把上一个文件移入PowerTrace文件*/
+                    if (res.current_trace >= 2 && skip == false)
+                    { filemove.move(res.current_trace - 2); }
 
                     /*检测文件是否完成写入*/
-                    startTime = Environment.TickCount;
-                    while (true)
+                    timeout.Reset();
+                    timeout.Start();
+                    while (skip == false)
                     {
-                        try
-                        {
-                            //  FileInfo file = new FileInfo(filename);
-                            //  if (file.Length > 100000) break;
-                            if (fileisOpen(filename) == false) break;
-                            int runtime = Environment.TickCount - startTime;
-                            if (runtime > 1000) { break; }
-                        }
-                        catch { break; }
+                        //  FileInfo file = new FileInfo(filename);
+                        //  if (file.Length > 100000) break;
+                        if (fileisOpen(filename) == false) break;
+                        timeout.Stop();
+                        if (timeout.ElapsedMilliseconds > 1000) { break; }
+                        else { timeout.Start(); }
                         System.Threading.Thread.Sleep(10);
                     }
+                    if (timeout.IsRunning == true) { timeout.Stop(); }
                     System.Threading.Thread.Sleep(args.wait);
                 }
                 sw.Stop();
@@ -204,6 +205,8 @@ namespace SAKURA
             }   //while loop end here
 
             filewrite.closefile();
+            filemove.move(res.current_trace - 1);
+            filemove.close();
 
             res.last = true;
             worker.ReportProgress(progress, (object)res);
