@@ -379,7 +379,7 @@ namespace SAKURA_Checker
         private void button_about_Click(object sender, EventArgs e)
         {
             MessageBox.Show("版本：1.0.0 ReleaseTime: 2016/5/19 16:07\n"+
-                            "\t把所有文件移入一个文件中" );
+                            "\t把所有文件移入一个文件中,增加异常处理" );
         }
     }
 }
